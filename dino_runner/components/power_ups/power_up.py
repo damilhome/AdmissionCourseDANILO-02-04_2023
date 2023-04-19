@@ -12,7 +12,7 @@ class PowerUp(pygame.sprite.Sprite):
         self.rect.y = random.randint(125, 175)
 
         self.start_time = 0
-        self.durantion = random.randint(5, 10)
+        self.duration = random.randint(5, 10)
 
     def update(self, game_speed, power_ups):
         self.rect.x -= game_speed

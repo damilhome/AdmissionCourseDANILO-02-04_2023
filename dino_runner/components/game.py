@@ -102,17 +102,13 @@ class Game:
         self.write_text_on_screen(f"Highest: {self.h_score}", 900, 80, 22)
 
     def draw_power_up_time(self):
-        if self.player.has_power_up:
+        if self.player.shield or self.player.hammer:
             time_to_show = round((self.player.power_up_time - pygame.time.get_ticks()) / 1000, 2)
-            if time_to_show >= 0:
-                self.write_text_on_screen(
-                    f"{self.player.type.capitalize()} enabled for {time_to_show} seconds.",
-                    500,
-                    500,
-                    22
-                )
+            if time_to_show > 0:
+                self.write_text_on_screen(f"{self.player.type.capitalize()} enabled for {time_to_show} seconds.", 370, 40, 22)
             else:
-                self.player.has_power_up = False
+                self.player.shield = False
+                self.player.hammer = False
                 self.player.type = DEFAULT_TYPE
 
 
