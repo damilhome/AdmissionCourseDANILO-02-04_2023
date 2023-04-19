@@ -60,6 +60,7 @@ class Game:
         user_input = pygame.key.get_pressed()
         self.player.update(user_input)
         self.update_score()
+        print("death_2")
         self.obstacle_manager.update(self)
         self.power_up_manager.update(self.score, self.game_speed, self.player)
 
@@ -136,7 +137,10 @@ class Game:
             self.screen.blit(ICON, (half_screen_width - 145, half_screen_height - 70))
             self.write_text_on_screen(f"Score: {self.save_score}", half_screen_width - 10, half_screen_height -60, 22)
             self.write_text_on_screen(f"Highest: {self.h_score}", half_screen_width - 10, half_screen_height - 30, 22)
-            self.write_text_on_screen(f"Died: {self.death_count} times", half_screen_width- 10, half_screen_height, 22)
+            if self.death_count == 1:
+                self.write_text_on_screen(f"Died: {self.death_count} time", half_screen_width- 10, half_screen_height, 22)
+            else:
+                self.write_text_on_screen(f"Died: {self.death_count} times", half_screen_width- 10, half_screen_height, 22)
             self.score = 0
             self.game_speed = 20
         
