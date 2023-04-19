@@ -7,15 +7,21 @@ from dino_runner.utils.constants import SMALL_CACTUS, LARGE_CACTUS
 from dino_runner.utils.constants import DEFAULT_TYPE
 
 class ObstacleManager:
-    def __init__(self):
+    def __init__(self, score):
         self.obstacles = []
-
+        self.o_score = score
 
     def update(self, game):
         obstacle_list = random.choice([SMALL_CACTUS, LARGE_CACTUS, "BIRD"])
         positionY = 325 if obstacle_list == SMALL_CACTUS else 300
 
-        if len(self.obstacles) == 0:
+        if len(self.obstacles) == 0 and self.o_score < 200:
+            self.obstacles.append(Cactus(SMALL_CACTUS, 325))
+        elif len(self.obstacles) == 0 and self.o_score < 400:
+            i = random.choice((SMALL_CACTUS, LARGE_CACTUS))
+            y = 325 if i == SMALL_CACTUS else 300
+            self.obstacles.append(Cactus(i, y))
+        elif len(self.obstacles) == 0 and self.o_score > 400:
             if obstacle_list == SMALL_CACTUS or LARGE_CACTUS:
                 self.obstacles.append(Cactus(obstacle_list, positionY))
             else:

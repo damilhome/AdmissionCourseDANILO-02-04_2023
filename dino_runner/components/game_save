@@ -4,6 +4,7 @@ from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacles.obstacles_manager import ObstacleManager
 from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, DEFAULT_TYPE
 from dino_runner.components.power_ups.power_up_manager import PowerUpManager
+from dino_runner.components.game_score import GameScore
 
 
 FONT_STYLE = "freesansbold.ttf"
@@ -19,7 +20,7 @@ class Game:
         self.game_speed = 20
         self.x_pos_bg = 0
         self.y_pos_bg = 380
-        self.score = 0
+        self.score = GameScore()
         self.save_score = 0
         self.h_score = 0
         self.death_count = 0
@@ -60,19 +61,19 @@ class Game:
         self.player.update(user_input)
         self.update_score()
         self.obstacle_manager.update(self)
-        self.power_up_manager.update(self.score, self.game_speed, self.player)
+        self.power_up_manager.update(self.score.score, self.game_speed, self.player)
 
     def update_score(self):
-        self.score += 1
-        self.save_score = self.score
-        if self.score < 500:
-            if self.score % 100 == 0:
+        self.score.score_to_update()
+        self.save_score = self.score.score
+        if self.score.score < 500:
+            if self.score.score % 100 == 0:
                 self.game_speed += 3
-        elif self.score < 5000:
-            if self.score % 500 == 0:
+        elif self.score.score < 5000:
+            if self.score.score % 500 == 0:
                 self.game_speed += 3
         else:
-            if self.score % 1000 == 0:
+            if self.score.score % 1000 == 0:
                 self.game_speed += 3
 
     def draw(self):
@@ -97,7 +98,7 @@ class Game:
         self.x_pos_bg -= self.game_speed
     
     def draw_score(self):
-        self.write_text_on_screen(f"Score: {self.score}", 900, 50, 22)
+        self.write_text_on_screen(f"Score: {self.score.score}", 900, 50, 22)
         self.write_text_on_screen(f"Highest: {self.h_score}", 900, 80, 22)
 
     def draw_power_up_time(self):
@@ -139,7 +140,7 @@ class Game:
                 self.write_text_on_screen(f"Died: {self.death_count} time", half_screen_width- 10, half_screen_height, 22)
             else:
                 self.write_text_on_screen(f"Died: {self.death_count} times", half_screen_width- 10, half_screen_height, 22)
-            self.score = 0
+            self.score.score = 0
             self.game_speed = 20
         
         pygame.display.update()
