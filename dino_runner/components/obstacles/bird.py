@@ -8,7 +8,7 @@ class Bird(Obstacle):
         self.step_index = 0
         super().__init__(BIRD, self.position)
         if self.position == 0:
-            self.rect.y = 270
+            self.rect.y = 255
         else:
             self.rect.y = 325
 

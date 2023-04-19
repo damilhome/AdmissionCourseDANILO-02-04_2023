@@ -56,11 +56,9 @@ class Game:
                 self.playing = False
 
     def update(self):
-        self.obstacle_manager.update(self)
         user_input = pygame.key.get_pressed()
         self.player.update(user_input)
         self.update_score()
-        print("death_2")
         self.obstacle_manager.update(self)
         self.power_up_manager.update(self.score, self.game_speed, self.player)
 
