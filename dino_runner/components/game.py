@@ -23,6 +23,7 @@ class Game:
         self.save_score = 0
         self.h_score = 0
         self.death_count = 0
+        self.heart = 0
         self.player = Dinosaur()
         self.obstacle_manager = ObstacleManager()
         self.power_up_manager = PowerUpManager()
@@ -42,6 +43,12 @@ class Game:
 
     def run(self):
         # Game loop: events - update - draw
+        for i in range (3, 0, -1):
+            self.screen.fill((255, 255, 255))
+            self.write_text_on_screen(str(i), SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, 50)
+            pygame.display.update()
+            pygame.time.delay(1000)
+        
         self.playing = True
         self.obstacle_manager.reset_obstacles()
         self.power_up_manager.reset_power_ups()
@@ -99,6 +106,7 @@ class Game:
     def draw_score(self):
         self.write_text_on_screen(f"Score: {self.score}", 900, 50, 22)
         self.write_text_on_screen(f"Highest: {self.h_score}", 900, 80, 22)
+        self.write_text_on_screen(f"Hearts: {self.heart}", 900, 110, 22)
 
     def draw_power_up_time(self):
         if self.player.shield or self.player.hammer:

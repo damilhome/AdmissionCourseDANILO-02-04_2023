@@ -26,6 +26,7 @@ class Dinosaur(Sprite):
         self.power_up_time = 0
         self.shield = False
         self.hammer = False
+        self.heart = 0
         self.show_text = False
         self.shield_time_up = 0
 

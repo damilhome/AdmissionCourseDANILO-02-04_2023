@@ -29,7 +29,10 @@ class ObstacleManager:
         for obstacle in self.obstacles:
             obstacle.update(game.game_speed, self.obstacles)
             if game.player.dino_rect.colliderect(obstacle.rect):
-                if not game.player.shield:
+                if not game.player.shield and game.player.heart > 0:
+                    self.obstacles.remove(obstacle)
+                    game.player.heart -= 1
+                elif not game.player.shield:
                     pygame.time.delay(500)
                     game.player.hammer = False
                     game.player.type = DEFAULT_TYPE

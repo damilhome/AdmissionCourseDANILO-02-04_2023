@@ -72,3 +72,4 @@ HEART = pygame.image.load(os.path.normpath(os.path.join(IMG_DIR, 'Other/SmallHea
 DEFAULT_TYPE = "default"
 SHIELD_TYPE = "shield"
 HAMMER_TYPE = "hammer"
+HEART_TYPE = "heart"
