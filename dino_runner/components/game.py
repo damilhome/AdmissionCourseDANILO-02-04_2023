@@ -104,6 +104,7 @@ class Game:
         self.x_pos_bg -= self.game_speed
     
     def draw_score(self):
+        self.heart = self.player.heart
         self.write_text_on_screen(f"Score: {self.score}", 900, 50, 22)
         self.write_text_on_screen(f"Highest: {self.h_score}", 900, 80, 22)
         self.write_text_on_screen(f"Hearts: {self.heart}", 900, 110, 22)

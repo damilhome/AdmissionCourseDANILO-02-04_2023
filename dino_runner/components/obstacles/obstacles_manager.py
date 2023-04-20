@@ -9,6 +9,7 @@ from dino_runner.utils.constants import DEFAULT_TYPE
 class ObstacleManager:
     def __init__(self):
         self.obstacles = []
+        self.when_appears = 0
 
 
     def update(self, game):
@@ -20,7 +21,13 @@ class ObstacleManager:
             positionY = 300
         obstacle_list = [SMALL_CACTUS, LARGE_CACTUS]
 
-        if len(self.obstacles) == 0:
+        if len(self.obstacles) == 0 and game.score < 200:
+            self.obstacles.append(Cactus(SMALL_CACTUS, 325))
+        elif len(self.obstacles) == 0 and 200 < game.score < 400:
+            i = random.choice((SMALL_CACTUS, LARGE_CACTUS))
+            y = 325 if i == SMALL_CACTUS else 300
+            self.obstacles.append(Cactus(i, y))
+        elif len(self.obstacles) == 0 and game.score > 400:
             if list_index == 0 or list_index == 1:
                 self.obstacles.append(Cactus(obstacle_list[list_index], positionY))
             else:
@@ -40,6 +47,8 @@ class ObstacleManager:
                     game.death_count += 1
                 else:
                     self.obstacles.remove(obstacle)
+        if self.when_appears < 2000:
+            self.when_appears += 500
 
     def draw(self, screen):
         for obstacle in self.obstacles:

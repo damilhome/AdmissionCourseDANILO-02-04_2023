@@ -4,11 +4,11 @@ from dino_runner.utils.constants import BIRD
 
 class Bird(Obstacle):
     def __init__(self):
-        self.position = random.randint(0,1)
+        self.position = random.randint(0, 1)
         self.step_index = 0
         super().__init__(BIRD, self.position)
         if self.position == 0:
-            self.rect.y = 255
+            self.rect.y = 245
         else:
             self.rect.y = 325
 

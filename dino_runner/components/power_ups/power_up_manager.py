@@ -30,7 +30,11 @@ class PowerUpManager:
         self.generate_power_up(score)
         for power_up in self.power_ups:
             power_up.update(game_speed, self.power_ups)
-            if player.dino_rect.colliderect(power_up.rect) and self.shield_truth:
+            if player.dino_rect.colliderect(power_up.rect) and self.heart_truth:
+                player.heart += 1
+                self.heart_truth = False
+                self.power_ups.remove(power_up)
+            elif player.dino_rect.colliderect(power_up.rect) and self.shield_truth:
                 power_up.start_time = pygame.time.get_ticks()
                 player.shield = True
                 player.type = power_up.type
@@ -43,10 +47,6 @@ class PowerUpManager:
                 player.type = power_up.type
                 player.power_up_time = power_up.start_time + (power_up.duration * 1000)
                 self.hammer_truth = False
-                self.power_ups.remove(power_up)
-            elif player.dino_rect.colliderect(power_up.rect) and self.heart_truth:
-                player.heart += 1
-                self.heart_truth = False
                 self.power_ups.remove(power_up)
 
     def draw(self, screen):
