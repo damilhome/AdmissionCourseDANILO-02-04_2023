@@ -9,7 +9,6 @@ from dino_runner.utils.constants import DEFAULT_TYPE
 class ObstacleManager:
     def __init__(self):
         self.obstacles = []
-        self.when_appears = 0
 
 
     def update(self, game):
@@ -47,8 +46,6 @@ class ObstacleManager:
                     game.death_count += 1
                 else:
                     self.obstacles.remove(obstacle)
-        if self.when_appears < 2000:
-            self.when_appears += 500
 
     def draw(self, screen):
         for obstacle in self.obstacles:
